@@ -48,6 +48,18 @@ export async function fetchApi<T>(endpoint: string, options: RequestOptions = {}
       throw new ApiError(errMsg, response.status);
     }
 
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      const text = await response.text();
+      const isHtml = text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html');
+      throw new ApiError(
+        isHtml
+          ? 'API route returned HTML instead of JSON data. Verifying backend connection...'
+          : `Unexpected response format (${contentType || 'non-JSON'}).`,
+        response.status
+      );
+    }
+
     const json: ApiEnvelope<T> = await response.json();
 
     if (!json.success && json.error) {
