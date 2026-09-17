@@ -542,3 +542,4 @@ export async function getWorldEvents() {
   setInCache(cacheKey, result, 60 * 60 * 1000); // 1 hour cache
   return { data: result, cached: false };
 }
+

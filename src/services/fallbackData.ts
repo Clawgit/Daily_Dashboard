@@ -161,3 +161,4 @@ export const FALLBACK_NEWS_DATA: Record<string, NewsDataResponse> = {
     ],
   },
 };
+
