@@ -1,4 +1,5 @@
 #developed by madhur
+#modified by Shewang
 # 🌐 WORLD PULSE — Real-Time World Intelligence Dashboard
 
 A production-quality, responsive **dynamic real-time information dashboard** built with React, Vite, TypeScript, Tailwind CSS, and a lightweight Node.js/Express data proxy.
