@@ -30,10 +30,13 @@ export function useWeather({
   const abortControllerRef = useRef<AbortController | null>(null);
   const geolocationAttempted = useRef<boolean>(false);
 
+  const dataRef = useRef<WeatherData | null>(null);
+  dataRef.current = data;
+
   const fetchWeather = useCallback(async (isManual: boolean = false) => {
     if (isManual) {
       setIsRefreshing(true);
-    } else if (!data) {
+    } else if (!dataRef.current) {
       setLoading(true);
     }
     setError(null);
@@ -62,7 +65,7 @@ export function useWeather({
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, [latitude, longitude, name, country, data]);
+  }, [latitude, longitude, name, country]);
 
   // Try geolocation once on mount if enabled and not previously attempted
   useEffect(() => {

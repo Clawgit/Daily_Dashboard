@@ -73,8 +73,13 @@ export async function fetchApi<T>(endpoint: string, options: RequestOptions = {}
     return json.data;
   } catch (err: any) {
     clearTimeout(timeoutId);
+    if (options.signal?.aborted || err.name === 'AbortError' && options.signal?.aborted) {
+      const abortErr = new Error('The operation was aborted');
+      abortErr.name = 'AbortError';
+      throw abortErr;
+    }
     if (err.name === 'AbortError') {
-      throw new ApiError('Request timed out. Please check your connection and retry.');
+      throw new ApiError('Request timed out. Please check your connection and retry.', 408);
     }
     throw err instanceof ApiError ? err : new ApiError(err.message || 'Network request failed');
   }

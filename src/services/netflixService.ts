@@ -11,7 +11,7 @@ export const netflixService = {
       });
       return await fetchApi<NetflixDataResponse>(`/netflix?${params.toString()}`, { signal, timeoutMs: 12000 });
     } catch (err: any) {
-      if (err.name === 'AbortError') throw err;
+      if (signal?.aborted || (err.name === 'AbortError' && signal?.aborted)) throw err;
       console.warn('Backend /api/netflix unavailable, using cached fallback snapshot:', err.message);
       const fallback = FALLBACK_NETFLIX_DATA.default;
       return {

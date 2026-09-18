@@ -23,10 +23,13 @@ export function useNetflix({
   const lastFetchedRef = useRef<number>(0);
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  const dataRef = useRef<NetflixDataResponse | null>(null);
+  dataRef.current = data;
+
   const fetchNetflix = useCallback(async (isManual: boolean = false) => {
     if (isManual) {
       setIsRefreshing(true);
-    } else if (!data) {
+    } else if (!dataRef.current) {
       setLoading(true);
     }
     setError(null);
@@ -49,7 +52,7 @@ export function useNetflix({
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, [category, country, data]);
+  }, [category, country]);
 
   useEffect(() => {
     fetchNetflix();

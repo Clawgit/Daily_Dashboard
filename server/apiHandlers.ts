@@ -222,9 +222,13 @@ async function fetchWikiMovieInfo(title: string): Promise<{ posterUrl?: string; 
   try {
     const cleanTitle = title.replace(/\s*\([^)]*\)/g, '').trim();
     const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanTitle)}`;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1500);
     const resp = await fetch(url, {
+      signal: controller.signal,
       headers: { 'User-Agent': 'MadhurDashboard/1.0 (madhur@example.com)' },
     });
+    clearTimeout(timeout);
 
     if (resp.ok) {
       const data: any = await resp.json();

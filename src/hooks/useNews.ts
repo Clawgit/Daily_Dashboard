@@ -21,10 +21,13 @@ export function useNews({
   const lastFetchedRef = useRef<number>(0);
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  const dataRef = useRef<NewsDataResponse | null>(null);
+  dataRef.current = data;
+
   const fetchNews = useCallback(async (isManual: boolean = false) => {
     if (isManual) {
       setIsRefreshing(true);
-    } else if (!data) {
+    } else if (!dataRef.current) {
       setLoading(true);
     }
     setError(null);
@@ -47,7 +50,7 @@ export function useNews({
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, [category, data]);
+  }, [category]);
 
   useEffect(() => {
     fetchNews();

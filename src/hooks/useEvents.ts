@@ -19,10 +19,13 @@ export function useEvents({
   const lastFetchedRef = useRef<number>(0);
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  const dataRef = useRef<EventsDataResponse | null>(null);
+  dataRef.current = data;
+
   const fetchEvents = useCallback(async (isManual: boolean = false) => {
     if (isManual) {
       setIsRefreshing(true);
-    } else if (!data) {
+    } else if (!dataRef.current) {
       setLoading(true);
     }
     setError(null);
@@ -45,7 +48,7 @@ export function useEvents({
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, [data]);
+  }, []);
 
   useEffect(() => {
     fetchEvents();

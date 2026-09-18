@@ -8,7 +8,7 @@ export const newsService = {
       const params = new URLSearchParams({ category });
       return await fetchApi<NewsDataResponse>(`/news?${params.toString()}`, { signal, timeoutMs: 9000 });
     } catch (err: any) {
-      if (err.name === 'AbortError') throw err;
+      if (signal?.aborted || (err.name === 'AbortError' && signal?.aborted)) throw err;
       console.warn('Backend /api/news unavailable, using cached fallback snapshot:', err.message);
       const fallback = FALLBACK_NEWS_DATA.default;
       return {

@@ -138,7 +138,7 @@ export const weatherService = {
       });
       return await fetchApi<WeatherData>(`/weather?${params.toString()}`, { signal, timeoutMs: 9000 });
     } catch (err: any) {
-      if (err.name === 'AbortError') throw err;
+      if (signal?.aborted || (err.name === 'AbortError' && signal?.aborted)) throw err;
       console.warn('Backend /api/weather unavailable, using direct Open-Meteo fallback:', err.message);
       return await fetchDirectWeather(latitude, longitude, name, country, signal);
     }

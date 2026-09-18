@@ -7,7 +7,7 @@ export const eventsService = {
     try {
       return await fetchApi<EventsDataResponse>('/events', { signal, timeoutMs: 9000 });
     } catch (err: any) {
-      if (err.name === 'AbortError') throw err;
+      if (signal?.aborted || (err.name === 'AbortError' && signal?.aborted)) throw err;
       console.warn('Backend /api/events unavailable, using Around India festival database fallback:', err.message);
       return FALLBACK_AROUND_INDIA_EVENTS;
     }

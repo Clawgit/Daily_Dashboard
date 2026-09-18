@@ -127,3 +127,4 @@ export const AroundIndia: React.FC<AroundIndiaProps> = ({
     </Card>
   );
 };
+
