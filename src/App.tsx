@@ -101,7 +101,7 @@ export function App() {
             Mobile: 1 Column:
               Weather -> World Clock -> Netflix + Prime -> Top World News -> Around India
         */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-start">
           {/* 1. Weather */}
           <section aria-label="Current Weather & Forecast" className="flex flex-col">
             <WeatherHero
