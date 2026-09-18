@@ -42,17 +42,17 @@ export default {
         if (url.pathname === '/api/health') {
           return jsonResponse({
             status: 'ok',
-            name: 'World Pulse API Worker',
+            name: 'Madhur Dashboard API Worker',
             time: new Date().toISOString(),
             cacheEntries: getCacheSize(),
           });
         }
 
         if (url.pathname === '/api/weather') {
-          const lat = url.searchParams.get('latitude') || '40.7128';
-          const lon = url.searchParams.get('longitude') || '-74.0060';
-          const name = url.searchParams.get('name') || 'New York';
-          const country = url.searchParams.get('country') || 'United States';
+          const lat = url.searchParams.get('latitude') || '28.6139';
+          const lon = url.searchParams.get('longitude') || '77.2090';
+          const name = url.searchParams.get('name') || 'New Delhi';
+          const country = url.searchParams.get('country') || 'India';
           const result = await getWeatherData(lat, lon, name, country);
           return jsonResponse({ success: true, ...result, timestamp: new Date().toISOString() });
         }
@@ -64,14 +64,14 @@ export default {
         }
 
         if (url.pathname === '/api/netflix') {
-          const category = url.searchParams.get('category') || 'Films (English)';
-          const country = url.searchParams.get('country') || 'Global';
+          const category = url.searchParams.get('category') || 'Films';
+          const country = url.searchParams.get('country') || 'India';
           const result = await getNetflixTop10(category, country);
           return jsonResponse({ success: true, ...result, timestamp: new Date().toISOString() });
         }
 
         if (url.pathname === '/api/news') {
-          const category = url.searchParams.get('category') || 'World';
+          const category = url.searchParams.get('category') || 'AI & Technology';
           const result = await getGlobalNews(category);
           return jsonResponse({ success: true, ...result, timestamp: new Date().toISOString() });
         }
@@ -102,4 +102,3 @@ export default {
     return new Response('Not found', { status: 404 });
   },
 };
-

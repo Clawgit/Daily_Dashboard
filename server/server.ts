@@ -25,10 +25,10 @@ app.use(express.json());
 // ==========================================
 app.get('/api/weather', async (req: Request, res: Response) => {
   try {
-    const lat = req.query.latitude ? String(req.query.latitude) : '40.7128';
-    const lon = req.query.longitude ? String(req.query.longitude) : '-74.0060';
-    const locationName = req.query.name ? String(req.query.name) : 'New York';
-    const country = req.query.country ? String(req.query.country) : 'United States';
+    const lat = req.query.latitude ? String(req.query.latitude) : '28.6139';
+    const lon = req.query.longitude ? String(req.query.longitude) : '77.2090';
+    const locationName = req.query.name ? String(req.query.name) : 'New Delhi';
+    const country = req.query.country ? String(req.query.country) : 'India';
 
     const result = await getWeatherData(lat, lon, locationName, country);
     return res.json({ success: true, ...result, timestamp: new Date().toISOString() });
@@ -49,12 +49,12 @@ app.get('/api/weather/search', async (req: Request, res: Response) => {
 });
 
 // ==========================================
-// 2. NETFLIX TOP 10 ENDPOINT (Official Tudum TSV)
+// 2. NETFLIX TOP 10 ENDPOINT
 // ==========================================
 app.get('/api/netflix', async (req: Request, res: Response) => {
   try {
-    const category = req.query.category ? String(req.query.category) : 'Films (English)';
-    const country = req.query.country ? String(req.query.country) : 'Global';
+    const category = req.query.category ? String(req.query.category) : 'Films';
+    const country = req.query.country ? String(req.query.country) : 'India';
 
     const result = await getNetflixTop10(category, country);
     return res.json({ success: true, ...result, timestamp: new Date().toISOString() });
@@ -65,11 +65,11 @@ app.get('/api/netflix', async (req: Request, res: Response) => {
 });
 
 // ==========================================
-// 3. GLOBAL NEWS ENDPOINT (Google News RSS)
+// 3. GLOBAL & INDIA NEWS ENDPOINT
 // ==========================================
 app.get('/api/news', async (req: Request, res: Response) => {
   try {
-    const category = req.query.category ? String(req.query.category) : 'World';
+    const category = req.query.category ? String(req.query.category) : 'AI & Technology';
     const result = await getGlobalNews(category);
     return res.json({ success: true, ...result, timestamp: new Date().toISOString() });
   } catch (err: any) {
@@ -79,7 +79,7 @@ app.get('/api/news', async (req: Request, res: Response) => {
 });
 
 // ==========================================
-// 4. TODAY AROUND THE WORLD (Wikimedia On This Day)
+// 4. AROUND INDIA (Festivals & Cultural Events)
 // ==========================================
 app.get('/api/events', async (_req: Request, res: Response) => {
   try {
@@ -87,7 +87,7 @@ app.get('/api/events', async (_req: Request, res: Response) => {
     return res.json({ success: true, ...result, timestamp: new Date().toISOString() });
   } catch (err: any) {
     console.error('Events error:', err.message);
-    return res.status(500).json({ success: false, error: err.message || 'Failed to fetch daily world events' });
+    return res.status(500).json({ success: false, error: err.message || 'Failed to fetch daily events' });
   }
 });
 
@@ -95,7 +95,7 @@ app.get('/api/events', async (_req: Request, res: Response) => {
 app.get('/api/health', (_req: Request, res: Response) => {
   res.json({
     status: 'ok',
-    name: 'World Pulse API Proxy',
+    name: 'Madhur Dashboard API Proxy',
     time: new Date().toISOString(),
     cacheEntries: getCacheSize(),
   });
@@ -111,5 +111,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-  console.log(`🌐 World Pulse Server running on http://localhost:${PORT}`);
+  console.log(`🌐 Madhur Dashboard Server running on http://localhost:${PORT}`);
 });

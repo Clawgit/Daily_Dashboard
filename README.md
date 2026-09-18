@@ -1,10 +1,10 @@
 #developed by madhur
 #modified by Shewang
-# 🌐 WORLD PULSE — Real-Time World Intelligence Dashboard
+# 🌐 MADHUR DASHBOARD — Your World at a Glance
 
-A production-quality, responsive **dynamic real-time information dashboard** built with React, Vite, TypeScript, Tailwind CSS, and a lightweight Node.js/Express data proxy.
+A production-quality, responsive **dynamic real-time information dashboard** built with React, Vite, TypeScript, Tailwind CSS, and Cloudflare Workers / Node.js.
 
-**WORLD PULSE** is designed like a modern intelligence dashboard (inspired by Linear, Vercel, and modern financial terminals) providing live, verified global information with zero mock data.
+**MADHUR DASHBOARD** is designed like a modern intelligence dashboard providing live, verified global information with zero mock data.
 
 ---
 

@@ -66,6 +66,7 @@ export interface NetflixMovie {
   title: string;
   seasonTitle?: string;
   category: string;
+  type?: 'Movie' | 'Series' | string;
   cumulativeWeeks: number;
   weeklyHoursViewed?: number;
   runtimeHours?: number;
@@ -76,6 +77,9 @@ export interface NetflixMovie {
   releaseYear?: string;
   overview?: string;
   genre?: string[];
+  imdbRating?: string;
+  publicRating?: string;
+  releaseDate?: string;
   netflixUrl?: string;
 }
 
@@ -107,29 +111,33 @@ export interface NewsDataResponse {
   cached?: boolean;
 }
 
-export interface WorldEvent {
+export interface IndianFestivalEvent {
   id: string;
-  year?: number;
   title: string;
+  date: string;
+  region: string;
+  imageUrl: string;
   description: string;
-  category: 'historical' | 'observance' | 'holiday' | 'global';
-  wikipediaUrl?: string;
-  thumbnailUrl?: string;
-  location?: string;
+  culturalSignificance: string;
+  category?: 'festival' | 'observance' | 'harvest' | 'national';
 }
 
 export interface EventsDataResponse {
   dateStr: string;
-  events: WorldEvent[];
+  events: IndianFestivalEvent[];
   lastUpdated: string;
   cached?: boolean;
 }
+
+// Alias for backward compatibility
+export type WorldEvent = IndianFestivalEvent;
 
 export interface WorldClockCity {
   city: string;
   country: string;
   timezone: string;
   flag: string;
+  offsetLabel: string;
 }
 
 export interface UserSettings {
@@ -141,7 +149,7 @@ export interface UserSettings {
   };
   temperatureUnit: TemperatureUnit;
   newsCategory: string;
-  netflixCategory: 'Films (English)' | 'Films (Non-English)' | 'TV (English)' | 'TV (Non-English)';
+  netflixCategory: string;
   netflixCountry: string;
   autoRefresh: boolean;
   refreshIntervalMinutes: {
@@ -161,4 +169,3 @@ export interface ApiEnvelope<T> {
   timestamp: string;
   cached?: boolean;
 }
-

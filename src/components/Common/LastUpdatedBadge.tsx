@@ -38,27 +38,26 @@ export const LastUpdatedBadge: React.FC<LastUpdatedBadgeProps> = ({
   }, [timestamp]);
 
   return (
-    <div className="flex items-center gap-2 text-xs text-slate-400">
+    <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 flex-shrink-0">
       {cached && (
-        <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px]">
+        <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 text-[10px] font-mono font-medium">
           Cached
         </span>
       )}
-      <span className="font-mono text-[11px] opacity-80">
-        Updated {relativeTime}
+      <span className="font-mono text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">
+        {relativeTime}
       </span>
       {onRefresh && (
         <button
           onClick={onRefresh}
           disabled={isRefreshing}
           aria-label="Refresh section data"
-          className="p-1 rounded-md text-slate-400 hover:text-cyan-400 hover:bg-white/5 transition-all disabled:opacity-50"
+          className="touch-target p-1 rounded-lg text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-white/10 transition-all disabled:opacity-50"
           title="Refresh section"
         >
-          <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-cyan-400' : ''}`} />
+          <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin text-cyan-500' : ''}`} />
         </button>
       )}
     </div>
   );
 };
-

@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import { UserSettings } from '../types';
 
-const STORAGE_KEY = 'world_pulse_settings_v1';
+const STORAGE_KEY = 'madhur_dashboard_settings_v2';
 
 const DEFAULT_SETTINGS: UserSettings = {
   weatherLocation: {
-    name: 'New York',
-    country: 'United States',
-    latitude: 40.7128,
-    longitude: -74.0060,
+    name: 'New Delhi',
+    country: 'India',
+    latitude: 28.6139,
+    longitude: 77.2090,
   },
   temperatureUnit: 'celsius',
-  newsCategory: 'World',
-  netflixCategory: 'Films (English)',
-  netflixCountry: 'Global',
+  newsCategory: 'AI & Technology',
+  netflixCategory: 'Films',
+  netflixCountry: 'India',
   autoRefresh: true,
   refreshIntervalMinutes: {
     weather: 10,
@@ -78,4 +78,3 @@ export function useSettings() {
     resetSettings,
   };
 }
-
