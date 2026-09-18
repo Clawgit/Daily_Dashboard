@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { netflixService } from '../services/netflixService';
 import { NetflixDataResponse } from '../types';
 import { useTabVisibility } from './useTabVisibility';
+import { FALLBACK_NETFLIX_DATA } from '../services/fallbackData';
 
 interface UseNetflixProps {
   category?: string;
@@ -11,13 +12,13 @@ interface UseNetflixProps {
 }
 
 export function useNetflix({
-  category = 'Films (English)',
-  country = 'Global',
+  category = 'Films',
+  country = 'India',
   autoRefresh = true,
   intervalMinutes = 60,
 }: UseNetflixProps = {}) {
-  const [data, setData] = useState<NetflixDataResponse | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [data, setData] = useState<NetflixDataResponse | null>(() => FALLBACK_NETFLIX_DATA.default);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const lastFetchedRef = useRef<number>(0);
